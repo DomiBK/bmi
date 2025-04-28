@@ -1,0 +1,68 @@
+public class BmiViewModel : INotifyPropertyChanged
+{
+    private readonly BmiCalculator _calculator = new();
+    
+    private double _wzrost;
+    public double Wzrost
+    {
+        get => _wzrost;
+        set
+        {
+            _wzrost = value;
+            OnPropertyChanged(nameof(Wzrost));
+        }
+    }
+
+    private double _waga;
+    public double Waga
+    {
+        get => _waga;
+        set
+        {
+            _waga = value;
+            OnPropertyChanged(nameof(Waga));
+        }
+    }
+
+    private string _wynikBMI;
+    public string WynikBMI
+    {
+        get => _wynikBMI;
+        set => OnPropertyChanged(nameof(WynikBMI));
+    }
+
+    private string _kategoria;
+    public string Kategoria
+    {
+        get => _kategoria;
+        set => OnPropertyChanged(nameof(Kategoria));
+    }
+
+    public ICommand ObliczKomenda { get; }
+
+    public BmiViewModel()
+    {
+        ObliczKomenda = new Command(ObliczBMI);
+    }
+
+    private void ObliczBMI()
+    {
+        try
+        {
+            var wynik = _calculator.ObliczBMI(Wzrost, Waga);
+            WynikBMI = wynik.ToString();
+            Kategoria = _calculator.ZaklasyfikujBMI(wynik);
+        }
+        catch (Exception ex)
+        {
+            WynikBMI = "Błąd";
+            Kategoria = ex.Message;
+        }
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+}
