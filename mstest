@@ -1,0 +1,52 @@
+[TestClass]
+public class BmiTests
+{
+    private BmiCalculator _calculator;
+
+    [TestInitialize]
+    public void BeforeTestRun()
+    {
+        _calculator = new BmiCalculator();
+    }
+
+    [TestMethod]
+    public void Test_BMI_Obliczenia()
+    {
+        // Arrange
+        double wzrost = 175;
+        double waga = 70;
+
+        // Act
+        double wynik = _calculator.ObliczBMI(wzrost, waga);
+
+        // Assert
+        Assert.AreEqual(22.86, Math.Round(wynik, 2));
+    }
+
+    [TestMethod]
+    public void Test_Kategoryzacja_Niedowaga()
+    {
+        // Arrange & Act
+        string kategoria = _calculator.ZaklasyfikujBMI(18.0);
+
+        // Assert
+        Assert.AreEqual("Niedowaga", kategoria);
+    }
+
+    [TestMethod]
+    public void Test_Kategoryzacja_Prawidlowa()
+    {
+        // Arrange & Act
+        string kategoria = _calculator.ZaklasyfikujBMI(22.0);
+
+        // Assert
+        Assert.AreEqual("Prawidłowa waga", kategoria);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentException))]
+    public void Test_Walidacja_Nieprawidlowe_Dane()
+    {
+        _calculator.ObliczBMI(-175, 70);
+    }
+}
