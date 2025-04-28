@@ -1,0 +1,22 @@
+public class BmiCalculator
+{
+    public double ObliczBMI(double wzrost, double waga)
+    {
+        if (wzrost <= 0 || waga <= 0)
+            throw new ArgumentException("Wzrost i waga muszą być większe od zera");
+
+        return Math.Round(waga / Math.Pow(wzrost / 100, 2), 2);
+    }
+
+    public string ZaklasyfikujBMI(double bmi)
+    {
+        if (bmi < 18.5m)
+            return "Niedowaga";
+        else if (bmi < 25m)
+            return "Prawidłowa waga";
+        else if (bmi < 30m)
+            return "Nadwaga";
+        else
+            return "Otyłość";
+    }
+}
