@@ -1,0 +1,7 @@
+public class BmiModel
+{
+    public double Wzrost { get; set; }
+    public double Waga { get; set; }
+    public double WynikBMI { get; set; }
+    public string Kategoria { get; set; }
+}
