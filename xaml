@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BMICalculator.MainPage"
+             Title="Kalkulator BMI">
+    <StackLayout Padding="20" Spacing="20">
+        <Label Text="Kalkulator BMI" 
+               FontSize="Title" 
+               HorizontalOptions="Center"/>
+        
+        <Entry Placeholder="Wzrost (cm)"
+               Keyboard="Numeric"
+               Text="{Binding Wzrost}"/>
+        
+        <Entry Placeholder="Waga (kg)"
+               Keyboard="Numeric"
+               Text="{Binding Waga}"/>
+        
+        <Button Text="Oblicz BMI"
+                Command="{Binding ObliczKomenda}"
+                HorizontalOptions="Center"/>
+        
+        <Label Text="Twój BMI:" 
+               FontSize="Medium"/>
+        <Label Text="{Binding WynikBMI}"
+               FontSize="Large"
+               HorizontalOptions="Center"/>
+        
+        <Label Text="Kategoria:" 
+               FontSize="Medium"/>
+        <Label Text="{Binding Kategoria}"
+               FontSize="Large"
+               HorizontalOptions="Center"/>
+    </StackLayout>
+</ContentPage>
